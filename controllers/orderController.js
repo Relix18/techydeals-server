@@ -33,11 +33,11 @@ export const newOrder = catchAsyncError(async (req, res, next) => {
     user: req.user._id,
   });
 
-  // await sendEmail({
-  //   email: req.user.email,
-  //   subject: "Order Placed",
-  //   message: `Your order has been placed successfully. Your order number is ${orderId}.`,
-  // });
+  await sendEmail({
+    email: req.user.email,
+    subject: "Order Placed",
+    message: `Your order has been placed successfully. Your order number is ${orderId}.`,
+  });
 
   res.status(200).json({
     success: true,

@@ -9,7 +9,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
-import payment from "./routes/paymentRoute.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -35,10 +34,6 @@ app.use("/api/v1/product", product);
 app.use("/api/v1", user);
 app.use("/api/v1", cart);
 app.use("/api/v1", order);
-app.use("/api/v1", payment);
-app.use("/api/v1/getkey", (req, res) => {
-  res.status(200).json({ key: process.env.RAZORPAY_API_KEY });
-});
 
 //error middleware
 app.use(errorMiddleware);

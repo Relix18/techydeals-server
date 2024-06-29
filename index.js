@@ -2,7 +2,6 @@ import { app } from "./app.js";
 import { connectDB } from "./data/database.js";
 import dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
-import Razorpay from "razorpay";
 
 //Handling uncaught Exception
 process.on("uncaughtException", (err) => {
@@ -16,29 +15,21 @@ dotenv.config({ path: "data/.env" });
 
 connectDB();
 
-//Razorpay
-export const instance = new Razorpay({
-  key_id: process.env.RAZORPAY_API_KEY,
-  key_secret: process.env.RAZORPAY_API_SECRET,
-});
-
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-if (!process.env.VERCEL) {
-  const server = app.listen(process.env.PORT, () => {
-    console.log(`listening on port ${process.env.PORT}`);
-  });
+const server = app.listen(process.env.PORT, () => {
+  console.log(`listening on port ${process.env.PORT}`);
+});
 
-  process.on("unhandledRejection", (err) => {
-    console.log(`Error: ${err.message}`);
-    console.log(`Shutting down the server due to unhandled Promise Rejection`);
+process.on("unhandledRejection", (err) => {
+  console.log(`Error: ${err.message}`);
+  console.log(`Shutting down the server due to unhandled Promise Rejection`);
 
-    server.close(() => {
-      process.exit(1);
-    });
+  server.close(() => {
+    process.exit(1);
   });
-}
+});
