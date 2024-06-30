@@ -17,10 +17,10 @@ export const app = express();
 
 dotenv.config({ path: "data/.env" });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 //middlewares
-app.use(express.static(path.resolve(__dirname, "dist")));
+// app.use(express.static(path.resolve(__dirname, "dist")));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
@@ -38,10 +38,10 @@ app.use("/api/v1", order);
 //error middleware
 app.use(errorMiddleware);
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
-});
-
-// app.get("/", (req, res) => {
-//   res.send("hello");
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 // });
+
+app.get("/", (req, res) => {
+  res.send("hello");
+});
