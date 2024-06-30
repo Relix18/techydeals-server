@@ -17,17 +17,29 @@ Make Sure to Create a .env file in root directory and add appropriate variables 
 **Essential Variables**
 
 CLIENT_URL = `frontend url`
+
 PORT =
+
 NODE_ENV = **development** or **production**
+
 MONGO_URI = `mongo url`
+
 JWT_SECRET = `random string more the better`
+
 JWT_EXPIRE = `reset password token expire time default` **5d**
+
 COOKIE_EXPIRE = `cookie expire time`
+
 SMTP_HOST = "smtp.gmail.com"
+
 SMTP_PORT = 465
+
 SMTP_SERVICE = `gmail`
+
 SMTP_MAIL = `gmail account to send mail to user`
-SMTP_PASSWORD = `google account app password
+
+SMTP_PASSWORD = `google account app password`
+
 CLOUDINARY_NAME= `signup to cloudinary and get the cloudinary name on your profile`
 
 CLOUDINARY_API_KEY= `signup to cloudinary and get the api key on your profile`
