@@ -20,7 +20,7 @@ export const register = catchAsyncError(async (req, res, next) => {
     token: crypto.randomBytes(32).toString("hex"),
   }).save();
 
-  const url = ` ${req.protocol}://${process.env.CLIENT_URL}/users/${user._id}/verify/${token.token}`;
+  const url = ` ${process.env.CLIENT_URL}/users/${user._id}/verify/${token.token}`;
 
   try {
     await sendEmail({
@@ -68,7 +68,7 @@ export const login = catchAsyncError(async (req, res, next) => {
         token: crypto.randomBytes(32).toString("hex"),
       }).save();
 
-      const url = `${req.protocol}://${process.env.CLIENT_URL}/users/${user._id}/verify/${token.token}`;
+      const url = `${process.env.CLIENT_URL}/users/${user._id}/verify/${token.token}`;
       await sendEmail({
         email: user.email,
         subject: "Account Verification Token",
@@ -126,7 +126,7 @@ export const userVerified = catchAsyncError(async (req, res, next) => {
 //Forgot Password
 
 export const forgotPassword = catchAsyncError(async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne(req.body);
 
   if (!user) {
     return next(new ErrorHandler("User not found", 404));
@@ -136,7 +136,7 @@ export const forgotPassword = catchAsyncError(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${process.env.CLIENT_URL}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${process.env.CLIENT_URL}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then, please ignore it.`;
 
